@@ -2,7 +2,7 @@
 #define HEADER
 
 struct Ascii {
-  vector<int> freq;
+  std::vector<int> freq;
   Ascii();
   void update(const int index);
   void print();
@@ -13,19 +13,24 @@ struct Ascii {
 struct Node {
   int c;
   int weight;
-  shared_ptr<Node> left=nullptr;
-  shared_ptr<Node> right=nullptr;
+  std::shared_ptr<Node> left=nullptr;
+  std::shared_ptr<Node> right=nullptr;
   Node(const int c, const int weight):c{c},weight{weight}{}
-  string out(const int c, const string &s);
+  std::string out(const int c, const std::string &s);
 };
 
 struct Tree {
-  vector<Node>list;
+  std::vector<Node>list;
   Tree(const Ascii &a);
   void merge_least();
   void huffcode();
   void print();
 };
 
-void setSeed(string &s);
+void setSeed(std::string &s);
+
+int depth(Node &n, int inp);
+
+void wpl(Tree &t, Ascii &a);
+
 #endif

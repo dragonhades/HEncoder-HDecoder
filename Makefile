@@ -18,4 +18,4 @@ HDecode.o: HDecode.cc tools.h
 .PHONY: clean
 
 clean:
-	rm *.o *.d HDecode HEncode
+	rm *.o HDecode HEncode

@@ -10,9 +10,8 @@
 #include <termios.h>
 #include <unistd.h>
 using namespace std;
-#include "tools.h"
 
-#define PASSWORD "1"
+#include "tools.h"
 
 struct Tree;
 struct Node;
@@ -24,7 +23,6 @@ string read_bits(const char* filename){
   char c;
   while(file.get(c)){
     for (int i = 7; i >= 0; i--) {
-      //cout<<int((c>>i)&1)<<endl;
       if(int((c >> i) & 1)==1) bitstring += "1";
       else bitstring += "0";
     }
@@ -37,13 +35,9 @@ char decode(Tree &t, vector<char> &input,int &count){
   auto ptr = make_shared<Node>(t.list[0]);
   while(1){
     if(ptr->left==nullptr&&ptr->right==nullptr){
-      //if(ptr->c==128){
-      //throw "done";
-      //}
-      //cout<<"test "<<(char)ptr->c<<endl;
       return (char) ptr->c;
     }
-    if(input.empty()) throw "ERROR 1";
+    if(input.empty()) throw "EMPTY";
     count++;
     inp = input[0];
     input.erase(input.begin());
@@ -53,14 +47,17 @@ char decode(Tree &t, vector<char> &input,int &count){
       ptr = ptr->right;
     }
   }
-  throw "ERROR 2";
+  throw "EMPTY";
 }
 
 int main(int argc, char* argv[]){
+  
   if(argc<2){
     cerr<<"Usage: ./HDecode Filename";
     return 0;
   }
+
+  //http://stackoverflow.com/questions/6899025/hide-user-input-on-password-prompt
   termios oldt;
   tcgetattr(STDIN_FILENO, &oldt);
   termios newt = oldt;
@@ -80,16 +77,13 @@ int main(int argc, char* argv[]){
   Ascii ascii2;
   vector<char> input;
   int acc = 128;
-  int count=0;
+  int count = 0;
   string str = read_bits(argv[1]);
   istringstream iss(str);
   while(iss>>inp){
     input.emplace_back(inp);
   }
-  //if(input.empty())cout<<"empty"<<endl;
-  //else cout<<"not"<<endl;
-  //cout<<input[0]<<endl;
-  //cout<<input.size()<<endl;
+
   int bits=0;
   while(!input.empty()){
     Tree t(ascii1);
@@ -102,23 +96,17 @@ int main(int argc, char* argv[]){
       char c;
       try {
 	c = decode(t,input,bits);
-	//cout<<bits<<endl;
 	if(i==acc-1){
 	  int offset = 8-bits%8;
 	  bits+=offset;
-	  //cout<<offset;
 	  if(offset!=8){
 	    for(int x=0;x<offset;x++){
 	      input.erase(input.begin());
 	    }
 	  }
 	}
-      } catch(const char *exp){
-	//cout<<exp;
-	break;
-      }
+      } catch(const char *exp){ break; }
       unsigned int num = int(c);
-      //cout<<num<<endl;
       ascii2.update(num);
       cout<<c;
     }
