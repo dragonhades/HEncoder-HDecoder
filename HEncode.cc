@@ -10,6 +10,7 @@
 #include <termios.h>
 #include <unistd.h>
 using namespace std;
+
 #include "tools.h"
 
 struct Tree;
@@ -79,40 +80,14 @@ void bin_out(const string &s){
 
 }
 
-int depth(Node &n, int inp){
-  if(inp == n.c){
-    return 0;
-  } else {
-    if((!n.left)&&(!n.right)) throw 0;
-    if(!n.left){
-      return 1+depth(*n.right,inp);
-    }
-    try {
-      return 1+depth(*n.left,inp);
-    } catch(...){
-      if(!n.right) throw 0;
-      else return 1+depth(*n.right,inp);
-    }
-  }
-}
-
-void wpl(Tree &t, Ascii &a){
-  int sum=0;
-  for(int i=0; i<128; i++){
-    int freq = a.freq[i];
-    if(freq==0) continue;
-    int dep = depth(t.list[0],i);
-    sum += freq*dep;
-  }
-  ofstream of("huff.wpl");
-  of<<sum<<endl;
-}
-
 int main(int argc, char* argv[]){
+  
   if(argc<2){
     cerr<<"Usage: ./HDecode Filename";
     return 0;
   }
+  
+  //http://stackoverflow.com/questions/6899025/hide-user-input-on-password-prompt
   termios oldt;
   tcgetattr(STDIN_FILENO, &oldt);
   termios newt = oldt;
@@ -152,7 +127,6 @@ int main(int argc, char* argv[]){
     for(register int i = 0; i<acc; i++){
       fs>>noskipws>>inp;
       if(fs.fail()) {
-	//input.emplace_back(128);
 	break;
       }
       input.emplace_back(inp);
@@ -169,7 +143,9 @@ int main(int argc, char* argv[]){
     count++;
     if(fs.fail()) break;
   }
-  //t.huffcode();
-  //ascii2.hufffreq();
-  //wpl(t,ascii2);
+#ifdef DEBUG
+  t.huffcode();
+  ascii2.hufffreq();
+  wpl(t,ascii2);
+#endif
 }

@@ -106,3 +106,32 @@ void setSeed(string &s){
   int gen = generator();
   srand(gen);
 }
+
+int depth(Node &n, int inp){
+  if(inp == n.c){
+    return 0;
+  } else {
+    if((!n.left)&&(!n.right)) throw 0;
+    if(!n.left){
+      return 1+depth(*n.right,inp);
+    }
+    try {
+      return 1+depth(*n.left,inp);
+    } catch(...){
+      if(!n.right) throw 0;
+      else return 1+depth(*n.right,inp);
+    }
+  }
+}
+
+void wpl(Tree &t, Ascii &a){
+  int sum=0;
+  for(int i=0; i<128; i++){
+    int freq = a.freq[i];
+    if(freq==0) continue;
+    int dep = depth(t.list[0],i);
+    sum += freq*dep;
+  }
+  ofstream of("huff.wpl");
+  of<<sum<<endl;
+}	
