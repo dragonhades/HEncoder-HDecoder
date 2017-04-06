@@ -11,13 +11,13 @@ Usage:
 Demo:
 $ ./HEncode toEncode.txt > encode.out
 Enter password:
-## pw42
+pw42
 Please enter again:
-## pw42
+pw42
 $ ./HDecode encode.out > myfile.txt
 Enter password:
 WARNING: Wrong password will get you unreadable messy code.
-## pw42
+pw42
 $ diff toEncode.txt myfile.txt
 $
 
