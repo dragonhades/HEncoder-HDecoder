@@ -1,7 +1,7 @@
 # HEncoder-HDecoder
 Encoder and Decoder based on the user input password to encode the given ASCII text file using Huffman tree.
 
-Install: 
+Install:   
   Please download all files in order to compile successfully. Makefile will generate two executables, "HDecode" and "HEncode"
 
 Usage:
