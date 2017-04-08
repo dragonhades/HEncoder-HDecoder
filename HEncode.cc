@@ -97,6 +97,12 @@ int main(int argc, char* argv[]){
     return 0;
   }
   
+  ifstream fs(argv[1]);
+  if(fs.fail()) {
+    cerr<<"Cannot open "<<argv[1]<<endl;
+    return 0;
+  }
+   
   // To hide password input from screen
   //http://stackoverflow.com/questions/6899025/hide-user-input-on-password-prompt
   termios oldt;
@@ -122,8 +128,6 @@ int main(int argc, char* argv[]){
   }
 
   tcsetattr(STDIN_FILENO, TCSANOW, &oldt);	// clean up
-
-  ifstream fs(argv[1]);
   
   int count=0;
   char inp;
