@@ -17,9 +17,12 @@ struct Tree;
 struct Node;
 struct Ascii;
 
+
+// open filename and read 1 byte every time, get bit and convert them into a string
 string read_bits(const char* filename){
   string bitstring;
   ifstream file(filename, ios::binary);
+  if(file.fail()) throw string("Cannot open ")+filename;
   char c;
   while(file.get(c)){
     for (int i = 7; i >= 0; i--) {
@@ -30,6 +33,7 @@ string read_bits(const char* filename){
   return bitstring;
 }
 
+// use Tree t, find and return the decoded message
 char decode(Tree &t, vector<char> &input,int &count){
   int inp;
   auto ptr = make_shared<Node>(t.list[0]);
@@ -52,9 +56,17 @@ char decode(Tree &t, vector<char> &input,int &count){
 
 int main(int argc, char* argv[]){
   
+  // check if have enough argument
   if(argc<2){
     cerr<<"Usage: ./HDecode Filename";
     return 0;
+  }
+
+  string str;
+  try {
+    str = read_bits(argv[1]);
+  } catch(const string &s){
+    cerr<<s<<endl;
   }
 
   //http://stackoverflow.com/questions/6899025/hide-user-input-on-password-prompt
@@ -78,7 +90,6 @@ int main(int argc, char* argv[]){
   vector<char> input;
   int acc = 128;
   int count = 0;
-  string str = read_bits(argv[1]);
   istringstream iss(str);
   while(iss>>inp){
     input.emplace_back(inp);
