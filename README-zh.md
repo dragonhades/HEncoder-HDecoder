@@ -11,6 +11,7 @@
   'runTest.sh' 是测试用bash脚本， 需要一个文件名作为commandline arguement， 若无stdout结果则程序运行正常（详见diff命令）。  
   
 Demo:   
+```bash
 $ ./HEncode toEncode.txt > encode.out  
 Enter password:  
 pw42  
@@ -22,6 +23,7 @@ WARNING: Wrong password will get you unreadable messy code.
 pw42  
 $ diff toEncode.txt myfile.txt  
 $  
+```
   
 注意: 由于哈夫曼算法特性，输入文件目前只支持ASCII文本（即不支持中文）。  
      只有当加密时输入的密码和解码时输入的密码一致时正确的文本才会被显示出来。 如果解码时密码错误则会得到乱码。  
