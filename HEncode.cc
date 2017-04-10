@@ -134,6 +134,7 @@ int main(int argc, char* argv[]){
   Ascii ascii1;
   Ascii ascii2;
   vector<int> input;
+  string output;
   int acc = 128;
 
   while(1){
@@ -148,18 +149,23 @@ int main(int argc, char* argv[]){
       ascii2.update(num);
     }
     Tree t(ascii1);
+    
     if(count==0){
 
       // use the password as a seed to shuffle the first 128 ASCII entries.
 
       random_shuffle(t.list.begin(),t.list.end());	// dll <algorithm>
     }
+
     t.merge_least();	// tools.h
-    bin_out(encode(t,input));
+    output += encode(t,input);
     acc=acc*2;
     count++;
     if(fs.fail()) break;
   }
+ 
+  // stream out binary sequence
+  bin_out(output);
 
 #ifdef DEBUG
   // tools.h
