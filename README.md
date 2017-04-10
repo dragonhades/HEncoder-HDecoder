@@ -9,9 +9,9 @@ Install:
 
 Usage:  
 --------
-  'HEncode' takes a filename as commandline arguement. It will ask the user to give input as a password, and will output the encoded binary file to stdout.  
-  'HDecode' takes a filename as commandline arguement. It will ask the user to give input as a password, and ask again to prevent possible typos. Then it will output the decoded text to stdout.  
-  'runTest.sh' is a bash script yo help testing. It takes a filename as commandline argument, and use 'diff' command as result of output.  
+  * 'HEncode' takes a filename as commandline arguement. It will ask the user to give input as a password, and will output the encoded binary file to stdout.  
+  * 'HDecode' takes a filename as commandline arguement. It will ask the user to give input as a password, and ask again to prevent possible typos. Then it will output the decoded text to stdout.  
+  * 'runTest.sh' is a bash script yo help testing. It takes a filename as commandline argument, and use 'diff' command as result of output.  
 
 Demo:
 -----
