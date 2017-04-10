@@ -1,7 +1,8 @@
 # HEncoder-HDecoder
-[English Readme](https://github.com/dragonhades/HEncoder-HDecoder/blob/master/README.md).  
 基于改良过的哈夫曼树对ASCII文本压缩算法制作的二进制文件编码器和解码器。 改良版的算法可以在仅一遍的用户文件长度时间中完成编码，并且不需要将原本的哈夫曼树包含在加密文件中也可完成解码。  
 增加了加密功能，使得用户可以输入密码进行加密，只有拥有相同密钥才可解码，且密码本身不包含在加密文件中。  
+  
+[English Readme](https://github.com/dragonhades/HEncoder-HDecoder/blob/master/README.md).  
   
 安装  
 ---
