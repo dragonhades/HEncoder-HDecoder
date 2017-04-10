@@ -68,7 +68,8 @@ int main(int argc, char* argv[]){
   } catch(const string &s){
     cerr<<s<<endl;
   }
-
+  
+  // hide user entered password from screen
   //http://stackoverflow.com/questions/6899025/hide-user-input-on-password-prompt
   termios oldt;
   tcgetattr(STDIN_FILENO, &oldt);
@@ -102,12 +103,14 @@ int main(int argc, char* argv[]){
       random_shuffle(t.list.begin(),t.list.end());
     }
     t.merge_least();
-    if(count==1) acc = 128;
+    if(count==1) acc = 128;  // sequence is 128, 128, 256, 512, 1024 ...
     for(register int i = 0; i<acc; i++){
       char c;
       try {
-	c = decode(t,input,bits);
-	if(i==acc-1){
+	c = decode(t,input,bits); // may throw 
+	if(i==acc-1){ // if reached the end of acc inputs
+	  
+	  //clear the fulfilled 0 bits, see HEncode.cc
 	  int offset = 8-bits%8;
 	  bits+=offset;
 	  if(offset!=8){
