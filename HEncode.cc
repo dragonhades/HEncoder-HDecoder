@@ -17,6 +17,11 @@ struct Tree;
 struct Node;
 struct Ascii;
 
+// int defined in tool.cc, see more details there
+// Used to set the acc for huffman coding loop sequence
+// Default to 128
+extern unsigned int ACCUMULATOR;
+
 int char_to_int(const char &c){
   if(c=='0') return 0;
   else return 1;
@@ -135,12 +140,12 @@ int main(int argc, char* argv[]){
   Ascii ascii2;
   vector<int> input;
   string output;
-  int acc = 128;
+  int acc = ACCUMULATOR;
 
   while(1){
     ascii1=ascii2;
     input.clear();
-    if(count==1) acc=128;	// need a sequence of 128 128 256 512 1024 ...
+    if(count==1) acc=ACCUMULATOR;	// need a sequence of acc acc acc*2 acc*4 acc*8 ...
     for(register int i = 0; i<acc; i++){
       fs>>noskipws>>inp;
       if(fs.fail()) break;	// works on empty input file
@@ -154,7 +159,7 @@ int main(int argc, char* argv[]){
 
       // use the password as a seed to shuffle the first 128 ASCII entries.
 
-      random_shuffle(t.list.begin(),t.list.end());	// dll <algorithm>
+      random_shuffle(t.list.begin(),t.list.end());	// <algorithm>
     }
 
     t.merge_least();	// tools.h

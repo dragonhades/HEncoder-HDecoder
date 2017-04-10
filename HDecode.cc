@@ -17,6 +17,10 @@ struct Tree;
 struct Node;
 struct Ascii;
 
+// int defined in tool.cc, see more details there
+// Used to set the acc for huffman coding loop sequence
+// Default to 128
+extern unsigned int ACCUMULATOR;
 
 // open filename and read 1 byte every time, get bit and convert them into a string
 string read_bits(const char* filename){
@@ -89,7 +93,7 @@ int main(int argc, char* argv[]){
   Ascii ascii1;
   Ascii ascii2;
   vector<char> input;
-  int acc = 128;
+  int acc = ACCUMULATOR;
   int count = 0;
   istringstream iss(str);
   while(iss>>inp){
@@ -106,7 +110,7 @@ int main(int argc, char* argv[]){
     }
     t.merge_least();
     
-    if(count==1) acc = 128;  // sequence is 128, 128, 256, 512, 1024 ...
+    if(count==1) acc = ACCUMULATOR;  // need a sequence of acc, acc, acc*2, acc*4, acc*8 ...
     
     for(register int i = 0; i<acc; i++){
       char c;

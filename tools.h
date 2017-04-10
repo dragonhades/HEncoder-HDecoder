@@ -1,6 +1,11 @@
 #ifndef HEADER
 #define HEADER
 
+// int defined in tool.cc, see more details there
+// Used to set the acc for huffman coding loop sequence
+// Default to 128
+extern unsigned int ACCUMULATOR;
+
 struct Ascii {
   std::vector<int> freq;
   Ascii();

@@ -8,6 +8,18 @@ using namespace std;
 
 #include "tools.h"
 
+// Global int defined for HEncode.cc and HDecode.cc to adjust the acc for 
+//  huffman loops. Default to 128
+// Since the number of all outcome of random_shuffle is ACCUMULATOR! (factorial)
+//  smaller the nummber, more unsafe it gets.
+// But the huffman compression works better if the file charator count 
+//  exceeds ACCUMULATOR by great amount.
+// Hence, change this number accordingly to get the best compression results.
+// WARNING: the program does not check the validity of this number.
+//          Any unexpected results due to the change of this number is not responsible
+//          by the program.
+unsigned int ACCUMULATOR=128;
+
 string Node::out(const int inp, const string &s){
   if(inp == c){
     return s;
