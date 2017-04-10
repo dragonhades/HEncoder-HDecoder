@@ -34,7 +34,7 @@ string read_bits(const char* filename){
 }
 
 // use Tree t, find and return the decoded message
-char decode(Tree &t, vector<char> &input,int &count){
+char decode(Tree &t, vector<char> &input){
   int inp;
   auto ptr = make_shared<Node>(t.list[0]);
   while(1){
@@ -42,7 +42,6 @@ char decode(Tree &t, vector<char> &input,int &count){
       return (char) ptr->c;
     }
     if(input.empty()) throw "EMPTY";
-    count++;
     inp = input[0];
     input.erase(input.begin());
     if(inp=='0'){
@@ -67,6 +66,7 @@ int main(int argc, char* argv[]){
     str = read_bits(argv[1]);
   } catch(const string &s){
     cerr<<s<<endl;
+    return 0;
   }
   
   // hide user entered password from screen
@@ -96,34 +96,28 @@ int main(int argc, char* argv[]){
     input.emplace_back(inp);
   }
 
-  int bits=0;
   while(!input.empty()){
+    
     Tree t(ascii1);
+    
     if(count==0){
+      // see HEncode.cc for details
       random_shuffle(t.list.begin(),t.list.end());
     }
     t.merge_least();
+    
     if(count==1) acc = 128;  // sequence is 128, 128, 256, 512, 1024 ...
+    
     for(register int i = 0; i<acc; i++){
       char c;
       try {
-	c = decode(t,input,bits); // may throw 
-	if(i==acc-1){ // if reached the end of acc inputs
-	  
-	  //clear the fulfilled 0 bits, see HEncode.cc
-	  int offset = 8-bits%8;
-	  bits+=offset;
-	  if(offset!=8){
-	    for(int x=0;x<offset;x++){
-	      input.erase(input.begin());
-	    }
-	  }
-	}
+	c = decode(t,input); // may throw 
       } catch(const char *exp){ break; }
       unsigned int num = int(c);
       ascii2.update(num);
       cout<<c;
     }
+    
     acc=acc*2;
     count++;
     ascii1=ascii2;
