@@ -1,4 +1,16 @@
 #!/bin/bash
+# check number of arguments
+if [ $# -lt 1 ]; then
+    echo "Error: need 2 arguments." >&2
+    exit 1
+fi
+
+# check if $1 exist and readable
+if [ ! -r $1 ]; then
+    echo "Error: $1 does not exist or unreadable." >&2
+    exit 1
+fi
+
 in1=$(mktemp)
 in2=$(mktemp)
 out=$(mktemp)
