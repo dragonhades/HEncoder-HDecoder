@@ -1,6 +1,6 @@
 language: c++
 os: linux
-compiler: g++-5 -std=c++14
+compiler: g++ -std=c++14
 before_install:
 # C++14
 - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
