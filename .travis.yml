@@ -11,3 +11,4 @@ install:
 - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
 - make
 script: ./runTest.sh news.txt
+after_script: make clean
