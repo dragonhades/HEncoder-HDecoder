@@ -1,5 +1,6 @@
 language: cpp
 os: linux
+env: GCC_VERSION=5 CPP=14
 before_install:
 # C++14
 - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
