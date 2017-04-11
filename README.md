@@ -1,4 +1,5 @@
 # HEncoder-HDecoder
+[![Build Status](https://travis-ci.org/dragonhades/HEncoder-HDecoder.svg?branch=master)](https://travis-ci.org/dragonhades/HEncoder-HDecoder)
 Encoder and Decoder based on the user input password to encode the given ASCII text file using Huffman tree.
   
 [中文说明](https://github.com/dragonhades/HEncoder-HDecoder/blob/master/README-zh.md).  
