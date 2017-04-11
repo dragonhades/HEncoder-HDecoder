@@ -1,3 +1,5 @@
 language: c++
+os: linux
+./configure && make
 script: ./runTest.sh README.md
 
