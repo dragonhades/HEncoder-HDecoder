@@ -10,5 +10,9 @@ install:
 - sudo apt-get install -qq g++-5
 - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
 - make
-script: ./test/runTest.sh
-after_script: make clean
+script: 
+- cd test
+- ./runTest.sh
+after_script: 
+- cd ..
+- make clean
