@@ -3,6 +3,5 @@ language: c++
 os: linux
 compiler: g++-5 -std=c++14
 before_install:
-- sudo apt-get update g++-5
 - sudo apt-get install g++-5
 script: ./runTest.sh README.md
