@@ -6,7 +6,7 @@
   
 安装  
 ---
-下载所有文件后运行Makefile即可完成安装。会产生两个可执行文件HEncode,HDecode。编译器为 g++ -std=c++14  
+下载所有文件后运行Makefile即可完成安装。会产生两个可执行文件HEncode,HDecode。编译器为 g++-5 -std=c++14  
   
 使用
 ---
