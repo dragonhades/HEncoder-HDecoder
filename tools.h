@@ -15,18 +15,25 @@ struct Ascii {
   void clear();
 };
 
-struct Node {
+class Node {
   int c;
   int weight;
+public:
   std::shared_ptr<Node> left=nullptr;
   std::shared_ptr<Node> right=nullptr;
   Node(const int c, const int weight):c{c},weight{weight}{}
   std::string out(const int c, const std::string &s);
+  int get_weight() const ;
+  int get_intChar() const ;
 };
 
-struct Tree {
+class Tree {
   std::vector<Node>list;
+public:
   Tree(const Ascii &a);
+  Node front() const ;
+  std::vector<Node>::iterator begin() ;
+  std::vector<Node>::iterator end() ;
   void merge_least();
   void huffcode();
   void print();
@@ -34,7 +41,7 @@ struct Tree {
 
 void setSeed(std::string &s);
 
-int depth(Node &n, int inp);
+int depth(const Node &n, int inp);
 
 void wpl(Tree &t, Ascii &a);
 
