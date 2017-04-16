@@ -5,7 +5,7 @@ Encoder and Decoder based on the user input password to encode the given ASCII t
   
 Install:
 ---------
-  Please download all files in order to compile successfully. Makefile will generate two executables, "HDecode" and "HEncode". Compiler used is g++ -std=c++14
+  Please download all files in order to compile successfully. Makefile will generate two executables, "HDecode" and "HEncode". Compiler used is g++-5 -std=c++14
 
 Usage:  
 --------
