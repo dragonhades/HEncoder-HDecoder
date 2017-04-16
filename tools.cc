@@ -20,6 +20,14 @@ using namespace std;
 //          by the program.
 unsigned int ACCUMULATOR=128;
 
+int Node::get_weight() const {
+  return weight;
+}
+
+int Node::get_intChar() const {
+  return c;
+}
+
 string Node::out(const int inp, const string &s){
   if(inp == c){
     return s;
@@ -41,7 +49,19 @@ Tree::Tree(const Ascii &a){
   for(register int i=0;i<128;i++){
     list.emplace_back(i,a.freq[i]);
   }
-  //list.emplace_back(128, 1);
+}
+
+Node Tree::front() const {
+  if(list.empty()) throw "List is empty";
+  return list[0];
+}
+
+vector<Node>::iterator Tree::begin() {
+  return list.begin();
+}
+
+vector<Node>::iterator Tree::end() {
+  return list.end();
 }
 
 void Tree::huffcode(){
@@ -54,26 +74,26 @@ void Tree::huffcode(){
 
 void Tree::merge_least(){
   if(int(list.size())==1) return;
-  int min = list[0].weight;
+  int min = list[0].get_weight();
   auto least=list.begin();
   for(auto l=list.begin();l!=list.end();l++){
-    if(l->weight<min) {
-      min = l->weight;
+    if(l->get_weight()<min) {
+      min = l->get_weight();
       least=l;
     }
   }
   Node temp = *least;
   list.erase(least);
-  min = list[0].weight;
+  min = list[0].get_weight();
   auto second=list.begin();
   for(auto l=list.begin();l!=list.end();l++){
-    if(l->weight<min){
-      min = l->weight;
+    if(l->get_weight()<min){
+      min = l->get_weight();
       second = l;
     }
   }
-  int left = temp.weight;
-  int right = second->weight;
+  int left = temp.get_weight();
+  int right = second->get_weight();
   Node n(-1,left+right);
   n.left = make_shared<Node>(temp);
   n.right = make_shared<Node>(*second);
@@ -119,8 +139,8 @@ void setSeed(string &s){
   srand(gen);
 }
 
-int depth(Node &n, int inp){
-  if(inp == n.c){
+int depth(const Node &n, int inp){
+  if(inp == n.get_intChar()){
     return 0;
   } else {
     if((!n.left)&&(!n.right)) throw 0;
@@ -141,7 +161,7 @@ void wpl(Tree &t, Ascii &a){
   for(int i=0; i<128; i++){
     int freq = a.freq[i];
     if(freq==0) continue;
-    int dep = depth(t.list[0],i);
+    int dep = depth(t.front(),i);
     sum += freq*dep;
   }
   ofstream of("huff.wpl");

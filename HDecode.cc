@@ -13,8 +13,8 @@ using namespace std;
 
 #include "tools.h"
 
-struct Tree;
-struct Node;
+class Tree;
+class Node;
 struct Ascii;
 
 // int defined in tool.cc, see more details there
@@ -40,10 +40,10 @@ string read_bits(const char* filename){
 // use Tree t, find and return the decoded message
 char decode(Tree &t, vector<char> &input){
   int inp;
-  auto ptr = make_shared<Node>(t.list[0]);
+  auto ptr = make_shared<Node>(t.front());
   while(1){
     if(ptr->left==nullptr&&ptr->right==nullptr){
-      return (char) ptr->c;
+      return (char) ptr->get_intChar();
     }
     if(input.empty()) throw "EMPTY";
     inp = input[0];
@@ -106,7 +106,7 @@ int main(int argc, char* argv[]){
     
     if(count==0){
       // see HEncode.cc for details
-      random_shuffle(t.list.begin(),t.list.end());
+      random_shuffle(t.begin(),t.end());
     }
     t.merge_least();
     

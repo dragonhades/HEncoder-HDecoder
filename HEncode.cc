@@ -13,8 +13,8 @@ using namespace std;
 
 #include "tools.h"
 
-struct Tree;
-struct Node;
+class Tree;
+class Node;
 struct Ascii;
 
 // int defined in tool.cc, see more details there
@@ -37,7 +37,7 @@ void get_bit(int *arr, int &count, const char c){
 string encode(Tree &t,vector<int> &input){
   string s;
   for(auto num:input){
-    s += t.list[0].out(num,"");
+    s += t.front().out(num,"");
   }
   return s;
 }
@@ -159,7 +159,7 @@ int main(int argc, char* argv[]){
 
       // use the password as a seed to shuffle the first 128 ASCII entries.
 
-      random_shuffle(t.list.begin(),t.list.end());	// <algorithm>
+      random_shuffle(t.begin(),t.end());	// <algorithm>
     }
 
     t.merge_least();	// tools.h
