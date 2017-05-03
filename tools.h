@@ -6,9 +6,11 @@
 // Default to 128
 extern unsigned int ACCUMULATOR;
 
-struct Ascii {
+class Ascii {
   std::vector<int> freq;
+public:
   Ascii();
+  int operator[](const int i) const ;
   void update(const int index);
   void print();
   void hufffreq();

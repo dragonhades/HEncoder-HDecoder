@@ -47,7 +47,7 @@ string Node::out(const int inp, const string &s){
 
 Tree::Tree(const Ascii &a){
   for(register int i=0;i<128;i++){
-    list.emplace_back(i,a.freq[i]);
+    list.emplace_back(i,a[i]);
   }
 }
 
@@ -108,6 +108,10 @@ Ascii::Ascii(){
   }
 }
 
+int Ascii::operator[](const int i) const {
+  return freq[i];
+}
+
 void Ascii::update(const int index){
   freq[index]++;
 }
@@ -159,7 +163,7 @@ int depth(const Node &n, int inp){
 void wpl(Tree &t, Ascii &a){
   int sum=0;
   for(int i=0; i<128; i++){
-    int freq = a.freq[i];
+    int freq = a[i];
     if(freq==0) continue;
     int dep = depth(t.front(),i);
     sum += freq*dep;
